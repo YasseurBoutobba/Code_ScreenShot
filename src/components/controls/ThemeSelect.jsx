@@ -7,7 +7,7 @@ const ThemeSelect = () => {
     const theme = useStore((state) => state.theme)
     return ( 
         <div>
-            <label className="block mb-2  text-sm font-medium text-neutral-400">Theme</label>
+            <label className="block mb-2  text-xs font-medium text-neutral-400">Theme</label>
             <Select value={theme} onValueChange={(theme) => useStore.setState({theme})}>
                 <SelectTrigger className="w-40">
                     <SelectValue placeholder="Select Theme" ></SelectValue>

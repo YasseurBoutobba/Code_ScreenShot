@@ -1,6 +1,5 @@
 import { languages } from "@/options";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { cn } from "@/lib/utils";
 import useStore from "@/store";
 import { MagicWandIcon } from "@radix-ui/react-icons"
 
@@ -16,7 +15,7 @@ const LanguageSelect = () => {
     }
     return ( 
         <div>
-            <label className="block mb-2  text-sm font-medium text-neutral-400">Language</label>
+            <label className="block mb-2  text-xs font-medium text-neutral-400">Language</label>
             <Select value={language} onValueChange={handelValueChange}>
                 <SelectTrigger className="w-40">
                     {autoDetectLanguage && <MagicWandIcon className="mr-2" />}

@@ -4,10 +4,15 @@ import { Button } from "./components/ui/button"
 import { fonts, themes } from "./options"
 import { useEffect, useRef } from "react"
 import { cn } from "./lib/utils"
-import { Card } from "./components/ui/card"
+import { Card , CardContent} from "./components/ui/card"
 import ExportOptions from "./components/controls/ExpotOptions"
 import ThemeSelect from "./components/controls/ThemeSelect"
 import LanguageSelect from "./components/controls/LanguageSelect"
+import FontSelect from "./components/controls/FontSelect"
+import FontSize from "./components/controls/FontZiseSelect"
+import PaddingControl from "./components/controls/PaddingControl"
+import BackgroundButton from "./components/controls/BackgroundButton"
+import DarkmodeButton from "./components/controls/DarkmodeButton"
 
 
 
@@ -51,10 +56,20 @@ function App() {
             ref={editorRef}>
         <CodeEditor />
       </div>
-      <Card className="fixed bottom-4 py-6 px-8 bg-neutral-900/90 backdrop-blur">
-        <ThemeSelect></ThemeSelect>
-        <LanguageSelect></LanguageSelect>
-        <ExportOptions targetRef={ editorRef } />
+      <Card className="fixed bottom-14 py-6 px-8 bg-neutral-900/90 backdrop-blur ">
+        <CardContent className="flex flex-wrap gap-6 p-0">
+          <ThemeSelect />
+          <LanguageSelect />
+          <FontSelect />
+          <FontSize />
+          <PaddingControl />
+          <BackgroundButton />
+          <DarkmodeButton />
+          <div className="w-px bg-neutral-800" />
+          <div className="place-self-center">
+            <ExportOptions targetRef={editorRef} />
+          </div>
+        </CardContent>
       </Card>
     </main>
     </>
