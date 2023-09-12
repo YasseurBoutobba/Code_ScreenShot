@@ -6,6 +6,8 @@ import { useEffect, useRef } from "react"
 import { cn } from "./lib/utils"
 import { Card } from "./components/ui/card"
 import ExportOptions from "./components/controls/ExpotOptions"
+import ThemeSelect from "./components/controls/ThemeSelect"
+import LanguageSelect from "./components/controls/LanguageSelect"
 
 
 
@@ -49,7 +51,9 @@ function App() {
             ref={editorRef}>
         <CodeEditor />
       </div>
-      <Card className="fixed bottom-10 py-6 px-8 bg-neutral-900/90 backdrop-blur">
+      <Card className="fixed bottom-4 py-6 px-8 bg-neutral-900/90 backdrop-blur">
+        <ThemeSelect></ThemeSelect>
+        <LanguageSelect></LanguageSelect>
         <ExportOptions targetRef={ editorRef } />
       </Card>
     </main>

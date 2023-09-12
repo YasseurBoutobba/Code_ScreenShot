@@ -4,6 +4,7 @@ import useStore from "../store";
 import hljs from "highlight.js";
 import Editor from "react-simple-code-editor";
 import { useEffect } from "react";
+import flourite from "flourite"
 
 const CodeEditor = () => {
     const store = useStore()
