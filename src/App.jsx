@@ -2,7 +2,7 @@ import  useStore  from "./store"
 import CodeEditor from "./components/CodeEditor"
 import { Button } from "./components/ui/button"
 import { fonts, themes } from "./options"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { cn } from "./lib/utils"
 import { Card , CardContent} from "./components/ui/card"
 import ExportOptions from "./components/controls/ExpotOptions"
@@ -13,6 +13,9 @@ import FontSize from "./components/controls/FontZiseSelect"
 import PaddingControl from "./components/controls/PaddingControl"
 import BackgroundButton from "./components/controls/BackgroundButton"
 import DarkmodeButton from "./components/controls/DarkmodeButton"
+import { Resizable } from "re-resizable"
+import ShowWidth from "./components/ShowWidth"
+import { ResetIcon } from "@radix-ui/react-icons"
 
 
 
@@ -22,6 +25,9 @@ function App() {
   const fontStyle = useStore(state => state.fontStyle)
   const showBackground = useStore(state => state.showBackground)
   const editorRef = useRef(null)
+
+  const [width, setWidth] = useState("auto")
+  const [showWidth, setShowWidth] = useState(false)
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search)
@@ -50,12 +56,26 @@ function App() {
         href={fonts[fontStyle].src}
         crossOrigin="anonymous"
       />
-      <div className={cn("overflow-hidden mb-2 transition-all ease-out",
-                      showBackground ? themes[theme].background : "ring ring-neutral-900")}
-            style={{padding}}
-            ref={editorRef}>
-        <CodeEditor />
-      </div>
+      <Resizable enable={{left:true , right:true}}
+        minWidth={padding * 2 + 400}
+        size={{ width }}
+        onResize={(e, dir, ref) => setWidth(ref.offsetWidth)}
+        onResizeStart={() => setShowWidth(true)}
+        onResizeStop={() => setShowWidth(false)}>
+        <div className={cn("overflow-hidden mb-2 transition-all ease-out",
+                        showBackground ? themes[theme].background : "ring ring-neutral-900")}
+              style={{padding}}
+              ref={editorRef}>
+          <CodeEditor />
+        </div>
+        {showWidth && <ShowWidth width={width} showWidth={showWidth} />}
+        {(!showWidth && width !== "auto" ) &&
+          <div className="w-fit mx-auto mt-0">
+            <Button variant='ghost' onClick={() => setWidth('auto')}>
+              <ResetIcon className="mr-3"/> Reset
+            </Button>
+          </div>}
+      </Resizable>
       <Card className="fixed bottom-14 py-6 px-8 bg-neutral-900/90 backdrop-blur ">
         <CardContent className="flex flex-wrap gap-6 p-0">
           <ThemeSelect />
