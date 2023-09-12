@@ -30,7 +30,7 @@ const ExportOptions = ( { targetRef }) => {
                 break;
             case "SVG":
                 imgUrl = await toSvg(targetRef.current, {pixelRatio: 2})
-                filename = `${name}.png`
+                filename = `${name}.svg`
                 break;
             default:
                 return;
